@@ -1,5 +1,5 @@
 const config = {
-    pageTitle: "LezasIcon | Handcrafted Orthodox Icons",
+    pageTitle: "Sacred Greek icons | Handcrafted Orthodox Icons",
     logoText: "LezasIcon",
     logoTagline: "Handcrafted Orthodox Icons for Every Sacred Space",
     hero: {
