@@ -1,0 +1,44 @@
+[
+    {
+        "title": "Virgin Mary Glykophilousa",
+        "price": "150€",
+        "image": "https://picsum.photos/id/1011/400/600",
+        "ebayLink": "https://www.ebay.com/itm/dummy1",
+        "status": "available"
+    },
+    {
+        "title": "Saint George",
+        "price": "120€",
+        "image": "https://picsum.photos/id/1012/400/600",
+        "ebayLink": "https://www.ebay.com/itm/dummy2",
+        "status": "available"
+    },
+    {
+        "title": "Christ Pantocrator",
+        "price": "180€",
+        "image": "https://picsum.photos/id/1013/400/600",
+        "ebayLink": "https://www.ebay.com/itm/dummy3",
+        "status": "available"
+    },
+    {
+        "title": "Saint Nicholas",
+        "price": "Sold",
+        "image": "https://picsum.photos/id/1014/400/600",
+        "ebayLink": "#",
+        "status": "past"
+    },
+    {
+        "title": "Prophet Elias",
+        "price": "Sold",
+        "image": "https://picsum.photos/id/1015/400/600",
+        "ebayLink": "#",
+        "status": "past"
+    },
+    {
+        "title": "Saint Catherine",
+        "price": "Sold",
+        "image": "https://picsum.photos/id/1016/400/600",
+        "ebayLink": "#",
+        "status": "past"
+    }
+]

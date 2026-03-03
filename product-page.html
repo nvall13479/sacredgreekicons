@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="product-page-title">Λεπτομέρειες Προϊόντος | LezasIcon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .product-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 4rem auto 2rem auto;
+            padding: 0 2rem;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        /* --- GALLERY STYLE --- */
+        .product-gallery { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+        .main-image-viewer {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            max-height: 70vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-image-viewer img { width: 100%; height: 100%; display: block; object-fit: contain; }
+        .thumbnail-list { display: flex; gap: 0.75rem; overflow-x: auto; padding: 0.5rem 0; }
+        .thumb-item { width: 80px; height: 80px; border-radius: 4px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease; flex-shrink: 0; }
+        .thumb-item.active { border-color: var(--primary-color); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- INFO STYLE --- */
+        .product-info { flex: 1; }
+        .product-info h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary-color); }
+        .product-info .price { font-size: 2rem; color: #8b4513; font-weight: bold; display: block; margin-bottom: 2rem; }
+        .product-description { font-size: 1.1rem; margin-bottom: 3rem; color: #444; line-height: 1.8; white-space: pre-line; }
+        .back-link { display: inline-block; margin-bottom: 1.5rem; color: #666; text-decoration: none; transition: 0.3s; }
+        .back-link:hover { color: var(--primary-color); }
+
+        /* --- NEW SECTION: RELATED AVAILABLE WORKS --- */
+        .related-works-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 3rem;
+        }
+        .related-works-section h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        /* Χρησιμοποιούμε το Grid που ήδη έχεις στο style.css */
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-container { flex-direction: column; padding: 1rem; gap: 2rem; }
+            .related-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <a href="index.html" class="menu-toggle" style="text-decoration: none;">
+                <i class="fas fa-arrow-left"></i>
+                <span class="menu-text">Επιστροφή</span>
+            </a>
+            <div class="main-logo">
+                <img src="img/logo.png" alt="LezasIcon Logo">
+                <p class="logo-text">LezasIcon</p>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="action-icon"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="product-container" id="product-details">
+            </div>
+
+        <section class="related-works-section" id="related-section" style="display: none;">
+            <h2>Available Now</h2>
+            <div class="related-grid" id="related-gallery">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 LezasIcon. All rights reserved.</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (typeof iconsData !== 'undefined') {
+                const product = iconsData.find(p => 
+                    p.id === productId || 
+                    p.title.toLowerCase().replace(/\s+/g, '-') === productId
+                );
+
+                const container = document.getElementById("product-details");
+
+                if (product) {
+                    // 1. ΕΜΦΑΝΙΣΗ ΚΥΡΙΟΥ ΠΡΟΪΟΝΤΟΣ
+                    document.getElementById("product-page-title").innerText = `${product.title} | LezasIcon`;
+                    const isAvailable = product.status === "available";
+                    const productImages = product.images || (product.image ? [product.image] : []);
+                    const mainImageSrc = productImages.length > 0 ? `img/${productImages[0]}` : 'img/placeholder.jpg';
+
+                    let thumbnailsHtml = '';
+                    if (productImages.length > 1) {
+                        thumbnailsHtml = '<div class="thumbnail-list">';
+                        productImages.forEach((img, index) => {
+                            const activeClass = index === 0 ? 'active' : '';
+                            thumbnailsHtml += `<div class="thumb-item ${activeClass}"><img src="img/${img}"></div>`;
+                        });
+                        thumbnailsHtml += '</div>';
+                    }
+
+                    container.innerHTML = `
+                        <div class="product-gallery">
+                            <div class="main-image-viewer"><img src="${mainImageSrc}" id="main-product-image"></div>
+                            ${thumbnailsHtml}
+                        </div>
+                        <div class="product-info">
+                            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Πίσω στην Γκαλερί</a>
+                            <h1>${product.title}</h1>
+                            <span class="price">${product.price}</span>
+                            <p class="product-description">${product.description || 'Χειροποίητη βυζαντινή εικόνα.'}</p>
+                            ${isAvailable 
+                                ? `<a href="${product.ebayLink}" target="_blank" class="buy-btn" style="display: inline-block; width: auto; padding: 1rem 3rem;">Αγορά στο eBay</a>`
+                                : `<span class="sold-tag" style="background: #eee; padding: 1rem 2rem; border-radius: 5px; color: #777;">Εξαντλήθηκε</span>`
+                            }
+                        </div>
+                    `;
+
+                    // Logic για thumbnails
+                    const mainImg = document.getElementById("main-product-image");
+                    document.querySelectorAll(".thumb-item").forEach(thumb => {
+                        thumb.addEventListener("click", function() {
+                            mainImg.src = this.querySelector("img").src;
+                            document.querySelector(".thumb-item.active").classList.remove("active");
+                            this.classList.add("active");
+                        });
+                    });
+
+                    // 2. ΕΜΦΑΝΙΣΗ RELATED AVAILABLE WORKS
+                    const relatedGallery = document.getElementById("related-gallery");
+                    const relatedSection = document.getElementById("related-section");
+                    
+                    // Φιλτράρουμε: Μόνο τα available ΚΑΙ όχι αυτό που βλέπουμε τώρα
+                    const otherAvailable = iconsData.filter(item => 
+                        item.status === 'available' && item.id !== product.id
+                    );
+
+                    if (otherAvailable.length > 0) {
+                        relatedSection.style.display = "block";
+                        otherAvailable.forEach(item => {
+                            const card = document.createElement("div");
+                            card.className = "card";
+                            const itemImg = (item.images && item.images.length > 0) ? item.images[0] : 'placeholder.jpg';
+                            
+                            card.innerHTML = `
+                                <div class="card-image-container">
+                                    <img src="img/${itemImg}" alt="${item.title}">
+                                </div>
+                                <div class="card-content">
+                                    <h3>${item.title}</h3>
+                                    <span class="price">${item.price}</span>
+                                    <div class="card-buttons">
+                                        <a href="product-page.html?id=${item.id}" class="view-btn" style="width: 100%; text-align: center;">Details</a>
+                                    </div>
+                                </div>
+                            `;
+                            relatedGallery.appendChild(card);
+                        });
+                    }
+
+                } else {
+                    container.innerHTML = "<h1>Το προϊόν δεν βρέθηκε</h1>";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
