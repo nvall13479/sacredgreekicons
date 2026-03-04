@@ -28,8 +28,8 @@ const iconsData = [
     },
     {
         "id": "agia-eleni",
-        "title": "Αγία Ελένη",
-        "price": "150€",
+        "title": "Saint Helen",
+        "price": "Sold",
         "images": ["agia-eleni.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy1",
         "status": "past",
@@ -37,8 +37,8 @@ const iconsData = [
     },
     {
         "id": "agia-aikaterini",
-        "title": "Αγία Αικατερίνη",
-        "price": "120€",
+        "title": "Saint Catherine",
+        "price": "Sold",
         "images": ["agia-aikaterini.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy2",
         "status": "past",
@@ -46,8 +46,8 @@ const iconsData = [
     },
     {
         "id": "iisous-christos-1",
-        "title": "Ιησούς Χριστός 1",
-        "price": "180€",
+        "title": "Jesus Christ",
+        "price": "Sold",
         "images": ["iisous-christos-1.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy3",
         "status": "past",
@@ -55,8 +55,8 @@ const iconsData = [
     },
     {
         "id": "agios-nikolaos-past",
-        "title": "Άγιος Νικόλαος",
-        "price": "130€",
+        "title": "Saint Nicholas",
+        "price": "Sold",
         "images": ["agios-nikolaos.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy4",
         "status": "past",
@@ -64,25 +64,16 @@ const iconsData = [
     },
     {
         "id": "panagia-1",
-        "title": "Παναγία 1",
-        "price": "160€",
+        "title": "Panagia Virgin Mary",
+        "price": "Sold",
         "images": ["panagia-1.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy5",
         "status": "past",
         "description": "The Virgin Mary holding the Christ Child."
     },
     {
-        "id": "agia-marina",
-        "title": "Αγία Μαρίνα",
-        "price": "140€",
-        "images": ["Αγία Μαρίνα.jpg"],
-        "ebayLink": "https://www.ebay.com/itm/dummy6",
-        "status": "past",
-        "description": "Icon of Saint Marina the Great Martyr."
-    },
-    {
         "id": "agios-dimitrios",
-        "title": "Άγιος Δημήτριος",
+        "title": "Saint Demetrius",
         "price": "Sold",
         "images": ["agios-dimitrios.png"],
         "ebayLink": "#",
@@ -90,17 +81,8 @@ const iconsData = [
         "description": "Saint Demetrius on horseback."
     },
     {
-        "id": "agia-paraskevi",
-        "title": "Αγία Παρασκευή",
-        "price": "Sold",
-        "images": ["Αγία Παρασκευή.jpg"],
-        "ebayLink": "#",
-        "status": "past",
-        "description": "Hand-painted icon of Saint Paraskevi."
-    },
-    {
         "id": "agios-efraim",
-        "title": "Άγιος Εφραίμ",
+        "title": "Saint Efraim of Nea Makri",
         "price": "Sold",
         "images": ["agios-efraim-neas-makris.jpg"],
         "ebayLink": "#",
