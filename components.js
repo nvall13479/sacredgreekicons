@@ -16,7 +16,7 @@ const headerTemplate = `
         <a href="index.html#available">Available Works</a>
         <a href="index.html#past-works">Past Works</a>
         <a href="index.html#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html#contact">Contact</a>
     </nav>
 </div>
 `;
@@ -29,7 +29,7 @@ const sidebarTemplate = `
     <a href="index.html#available">Available Works</a>
     <a href="index.html#past-works">Past Works</a>
     <a href="index.html#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html#contact">Contact</a>
 </nav>
 `;
 

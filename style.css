@@ -565,6 +565,76 @@ header {
     margin-right: 5px;
 }
 
+/* --- CONTACT & COMMISSIONS SECTION --- */
+.contact-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.contact-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    flex: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.contact-card i {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.contact-card h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.contact-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--header-bg-color);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-color);
+    transition: 0.3s;
+}
+
+.contact-link:hover {
+    color: var(--accent-color);
+}
+
+.contact-note {
+    margin-top: 3rem;
+    font-style: italic;
+    color: #888;
+}
+
+/* Responsive για κινητά */
+@media (max-width: 768px) {
+    .contact-methods {
+        flex-direction: column;
+    }
+}
+/* --- CONTACT & COMMISSIONS SECTION ΕΝD--- */
+
+
 /* --- BACK TO TOP BUTTON --- */
 .back-to-top {
     position: fixed;
