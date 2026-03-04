@@ -1,40 +1,50 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="product-page-title">Λεπτομέρειες Προϊόντος | LezasIcon</title>
+    <title id="product-page-title">Product Details | LezasIcon</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
 </head>
 <body>
-<header></header> <div class="mobile-sidebar" id="sidebar"></div> <div class="sidebar-overlay" id="overlay"></div>
+    <header></header> 
+    <div class="mobile-sidebar" id="sidebar"></div> 
+    <div class="sidebar-overlay" id="overlay"></div>
 
     <main>
         <div class="breadcrumb-container">
-        <nav class="breadcrumbs">
-            <a href="index.html">Home</a>
-            <span class="separator">/</span>
-            <span id="breadcrumb-category">Gallery</span>
-            <span class="separator">/</span>
-            <span id="breadcrumb-current" class="current">Loading...</span>
-        </nav>
-    </div>
+            <nav class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <span id="breadcrumb-category">Gallery</span>
+                <span class="separator">/</span>
+                <span id="breadcrumb-current" class="current">Loading...</span>
+            </nav>
+        </div>
+
         <div class="product-container" id="product-details">
             </div>
 
         <section class="related-works-section" id="related-section" style="display: none;">
             <h2>Available Now</h2>
-            <div class="related-grid" id="related-gallery">
-                </div>
+            <div class="related-grid" id="related-gallery"></div>
         </section>
     </main>
 
-<footer></footer>
+    <div id="lightbox" class="modal-lightbox">
+        <div class="modal-content-wrapper">
+            <span class="modal-close" id="close-modal">&times;</span>
+            <button class="nav-btn prev-btn" id="prev-image"><i class="fas fa-chevron-left"></i></button>
+            <img class="modal-image" id="modal-img" src="" alt="Zoomed view">
+            <button class="nav-btn next-btn" id="next-image"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <footer></footer>
 
     <script src="data.js"></script>
     <script src="components.js"></script>
@@ -42,6 +52,8 @@
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
+        let currentImageIndex = 0;
+        let productImages = [];
         
         if (typeof iconsData !== 'undefined') {
             const product = iconsData.find(p => 
@@ -52,7 +64,7 @@
             const container = document.getElementById("product-details");
 
             if (product) {
-                // 1. ΕΝΗΜΕΡΩΣΗ ΤΙΤΛΟΥ ΚΑΙ BREADCRUMBS
+                // 1. ΤΙΤΛΟΣ & BREADCRUMBS
                 document.getElementById("product-page-title").innerText = `${product.title} | LezasIcon`;
                 
                 const breadcrumbCategory = document.getElementById("breadcrumb-category");
@@ -65,9 +77,8 @@
                     breadcrumbCurrent.innerText = product.title;
                 }
 
-                // 2. ΠΡΟΕΤΟΙΜΑΣΙΑ ΕΙΚΟΝΩΝ
-                const isAvailable = product.status === "available";
-                const productImages = product.images || (product.image ? [product.image] : []);
+                // 2. ΕΙΚΟΝΕΣ
+                productImages = product.images || (product.image ? [product.image] : []);
                 const mainImageSrc = productImages.length > 0 ? `img/${productImages[0]}` : 'img/placeholder.jpg';
 
                 let thumbnailsHtml = '';
@@ -75,15 +86,15 @@
                     thumbnailsHtml = '<div class="thumbnail-list">';
                     productImages.forEach((img, index) => {
                         const activeClass = index === 0 ? 'active' : '';
-                        thumbnailsHtml += `<div class="thumb-item ${activeClass}"><img src="img/${img}"></div>`;
+                        thumbnailsHtml += `<div class="thumb-item ${activeClass}" data-index="${index}"><img src="img/${img}"></div>`;
                     });
                     thumbnailsHtml += '</div>';
                 }
 
-                // 3. ΕΜΦΑΝΙΣΗ ΚΥΡΙΟΥ ΠΕΡΙΕΧΟΜΕΝΟΥ
+                // 3. HTML ΠΡΟΪΟΝΤΟΣ
                 container.innerHTML = `
                     <div class="product-gallery">
-                        <div class="main-image-viewer">
+                        <div class="main-image-viewer" id="open-lightbox">
                             <img src="${mainImageSrc}" id="main-product-image" alt="${product.title}">
                         </div>
                         ${thumbnailsHtml}
@@ -92,66 +103,81 @@
                         <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
                         <h1>${product.title}</h1>
                         <span class="price">${product.price}</span>
-                        <p class="product-description">${product.description || 'Χειροποίητη βυζαντινή εικόνα υψηλής ποιότητας.'}</p>
-                        ${isAvailable 
-                            ? `<a href="${product.ebayLink}" target="_blank" class="buy-btn" style="display: inline-block; width: auto; padding: 1rem 3rem;">Αγορά στο eBay</a>`
-                            : `<span class="sold-tag" style="background: #eee; padding: 1rem 2rem; border-radius: 5px; color: #777; display: inline-block;">Εξαντλήθηκε / Sold</span>`
+                        <div class="product-description">${product.description || 'Handcrafted Byzantine Icon.'}</div>
+                        ${product.status === "available" 
+                            ? `<a href="${product.ebayLink}" target="_blank" class="buy-btn" style="display: inline-block; width: auto; padding: 1rem 3rem;">Buy on eBay</a>`
+                            : `<span class="sold-tag" style="background: #eee; padding: 1rem 2rem; border-radius: 5px; color: #777; display: inline-block;">Sold</span>`
                         }
                     </div>
                 `;
 
-                // 4. LOGIC ΓΙΑ THUMBNAILS (Εναλλαγή εικόνων)
+                // 4. LIGHTBOX & THUMBNAILS LOGIC
                 const mainImg = document.getElementById("main-product-image");
+                const lightbox = document.getElementById("lightbox");
+                const modalImg = document.getElementById("modal-img");
+
+                // Thumbnail click
                 document.querySelectorAll(".thumb-item").forEach(thumb => {
                     thumb.addEventListener("click", function() {
+                        currentImageIndex = parseInt(this.dataset.index);
                         mainImg.src = this.querySelector("img").src;
-                        const currentActive = document.querySelector(".thumb-item.active");
-                        if (currentActive) currentActive.classList.remove("active");
+                        document.querySelector(".thumb-item.active")?.classList.remove("active");
                         this.classList.add("active");
                     });
                 });
 
-                // 5. ΕΜΦΑΝΙΣΗ ΣΧΕΤΙΚΩΝ ΕΡΓΩΝ (RELATED WORKS)
+                // Open Lightbox
+                document.getElementById("open-lightbox").onclick = () => {
+                    lightbox.style.display = "flex";
+                    modalImg.src = `img/${productImages[currentImageIndex]}`;
+                    document.body.style.overflow = "hidden"; 
+                };
+
+                // Close Lightbox
+                const closeLightbox = () => {
+                    lightbox.style.display = "none";
+                    document.body.style.overflow = "auto";
+                };
+                document.getElementById("close-modal").onclick = closeLightbox;
+                lightbox.onclick = (e) => { if(e.target === lightbox) closeLightbox(); };
+
+                // Navigation
+                const navigate = (step) => {
+                    currentImageIndex = (currentImageIndex + step + productImages.length) % productImages.length;
+                    modalImg.src = `img/${productImages[currentImageIndex]}`;
+                };
+
+                document.getElementById("next-image").onclick = (e) => { e.stopPropagation(); navigate(1); };
+                document.getElementById("prev-image").onclick = (e) => { e.stopPropagation(); navigate(-1); };
+
+                // 5. RELATED WORKS
                 const relatedGallery = document.getElementById("related-gallery");
                 const relatedSection = document.getElementById("related-section");
-                
-                const otherAvailable = iconsData.filter(item => 
-                    item.status === 'available' && item.id !== product.id
-                );
+                const otherAvailable = iconsData.filter(item => item.status === 'available' && item.id !== product.id);
 
                 if (otherAvailable.length > 0 && relatedGallery) {
                     relatedSection.style.display = "block";
-                    relatedGallery.innerHTML = ''; // Καθαρισμός πριν το γέμισμα
                     otherAvailable.forEach(item => {
                         const card = document.createElement("div");
                         card.className = "card";
-                        const itemImg = (item.images && item.images.length > 0) ? item.images[0] : 'placeholder.jpg';
-                        
                         card.innerHTML = `
-                            <div class="card-image-container">
-                                <img src="img/${itemImg}" alt="${item.title}">
-                            </div>
+                            <div class="card-image-container"><img src="img/${item.images[0]}" alt="${item.title}"></div>
                             <div class="card-content">
                                 <h3>${item.title}</h3>
                                 <span class="price">${item.price}</span>
-                                <div class="card-buttons">
-                                    <a href="product-page.html?id=${item.id}" class="view-btn" style="width: 100%; text-align: center;">Details</a>
-                                </div>
+                                <div class="card-buttons"><a href="product-page.html?id=${item.id}" class="view-btn" style="width: 100%; text-align: center;">Details</a></div>
                             </div>
                         `;
                         relatedGallery.appendChild(card);
                     });
                 }
-
-                // Smooth scroll στην κορυφή αφού φορτωθεί το προϊόν
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
             } else {
-                container.innerHTML = "<div style='text-align:center; padding: 5rem;'><h1>Το προϊόν δεν βρέθηκε</h1><a href='index.html' class='back-link'>Επιστροφή στην Αρχική</a></div>";
+                container.innerHTML = "<div style='text-align:center; padding: 5rem;'><h1>Product not found</h1><a href='index.html'>Back Home</a></div>";
             }
         }
     });
-</script>
-    
+    </script>
 </body>
 </html>
