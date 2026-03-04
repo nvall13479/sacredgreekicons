@@ -6,9 +6,9 @@ const iconsData = [
         "price": "140€",
         // Πίνακας με πολλές εικόνες για το gallery
         "images": [
-            "agios-serafeim-sarof-2.png", 
-            "seraphim-detail-1.jpg", 
-            "seraphim-side-view.jpg"
+            "agios-serafeim-sarof-2.jpg", 
+            "agios-serafeim-sarof-2-2.jpg", 
+            "agios-serafeim-sarof-2-3.jpg"
         ],
         "ebayLink": "https://www.ebay.ie/itm/257373526013",
         "status": "available",
@@ -20,7 +20,8 @@ const iconsData = [
         "price": "150€",
         "images": [
             "saint-nicholas.jpg",
-            "nicholas-frame-detail.jpg"
+            "saint-nicholas-2.jpg",
+            "saint-nicholas-3.jpg"
         ],
         "ebayLink": "https://www.ebay.ie/itm/257386353891",
         "status": "available",
