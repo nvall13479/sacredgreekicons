@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LS3DJFE4XR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LS3DJFE4XR');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS3DJFE4XR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LS3DJFE4XR');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -119,7 +117,7 @@
                     thumbnailsHtml += '</div>';
                 }
 
-                // 3. HTML ΠΡΟΪΟΝΤΟΣ
+                // 3. HTML ΠΡΟΪΟΝΤΟΣ ΜΕ TRACKING
                 container.innerHTML = `
                     <div class="product-gallery">
                         <div class="main-image-viewer" id="open-lightbox">
@@ -133,7 +131,13 @@
                         <span class="price">${product.price}</span>
                         <div class="product-description">${product.description || 'Handcrafted Byzantine Icon.'}</div>
                         ${product.status === "available" 
-                            ? `<a href="${product.ebayLink}" target="_blank" class="buy-btn" style="display: inline-block; width: auto; padding: 1rem 3rem;">Buy on eBay</a>`
+                            ? `<a href="${product.ebayLink}" 
+                                  target="_blank" 
+                                  class="buy-btn" 
+                                  onclick="gtag('event', 'click_ebay', { 'product_name': '${product.title}' });"
+                                  style="display: inline-block; width: auto; padding: 1rem 3rem;">
+                                  Buy on eBay
+                               </a>`
                             : `<span class="sold-tag" style="background: #eee; padding: 1rem 2rem; border-radius: 5px; color: #777; display: inline-block;">Sold</span>`
                         }
                     </div>
@@ -214,7 +218,12 @@
                             <div class="card-content">
                                 <h3>${item.title}</h3>
                                 <span class="price">${item.price}</span>
-                                <div class="card-buttons"><a href="product-page.html?id=${item.id}" class="view-btn" style="width: 100%; text-align: center;">Details</a></div>
+                                <div class="card-buttons">
+                                    <a href="product-page.html?id=${item.id}" 
+                                       class="view-btn" 
+                                       onclick="gtag('event', 'click_related', { 'product_name': '${item.title}' });"
+                                       style="width: 100%; text-align: center;">Details</a>
+                                </div>
                             </div>
                         `;
                         relatedGallery.appendChild(card);

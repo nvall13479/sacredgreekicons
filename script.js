@@ -17,6 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 heroBtn.innerHTML = '';
                 if (icon) heroBtn.appendChild(icon);
                 heroBtn.appendChild(document.createTextNode(' ' + config.hero.buttonText));
+                
+                // Προσθήκη Tracking στο Hero Button
+                heroBtn.addEventListener('click', () => {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'click_hero_button', { 'event_category': 'Engagement' });
+                    }
+                });
             }
         }
     };
@@ -33,7 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (icon.status === "available") {
             actionButtons = `
                 <div class="card-buttons">
-                    <a href="${icon.ebayLink}" target="_blank" class="buy-btn">Buy on eBay</a>
+                    <a href="${icon.ebayLink}" 
+                       target="_blank" 
+                       class="buy-btn" 
+                       onclick="if(typeof gtag === 'function'){ gtag('event', 'click_ebay_home', { 'product_name': '${icon.title}' }); }">
+                       Buy on eBay
+                    </a>
                     <a href="product-page.html?id=${productId}" class="view-btn">Details</a>
                 </div>`;
         } else {
@@ -75,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 4. NAVIGATION LOGIC (SIDEBAR & BACK TO TOP) ---
+    // --- 4. NAVIGATION LOGIC ---
     const initNavigation = () => {
         const menuBtn = document.getElementById('mobile-menu-open');
         const closeBtn = document.getElementById('mobile-menu-close');
@@ -94,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
         if (overlay) overlay.addEventListener('click', toggleMenu);
 
-        // Scroll Logic για το Back to Top
         if (backToTopBtn) {
             window.addEventListener("scroll", () => {
                 if (window.scrollY > 400) {
@@ -122,15 +133,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (href && href.includes('#')) {
                     const parts = href.split('#');
                     const targetId = parts[1];
-                    const isHomePage = window.location.pathname.endsWith('index.html') || 
-                                     window.location.pathname === '/' || 
+                    
+                    // Βελτιωμένος έλεγχος για την αρχική σελίδα
+                    const isHomePage = window.location.pathname.includes('index.html') || 
+                                     window.location.pathname.endsWith('/') || 
                                      window.location.pathname === '';
 
                     if (isHomePage) {
                         const targetElement = document.getElementById(targetId);
                         if (targetElement) {
                             e.preventDefault();
-                            // Κλείσιμο μενού αν είναι ανοιχτό
                             if (sidebar && sidebar.classList.contains('active')) {
                                 sidebar.classList.remove('active');
                                 overlay.classList.remove('active');

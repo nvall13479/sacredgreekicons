@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LS3DJFE4XR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS3DJFE4XR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-LS3DJFE4XR');
-</script>
+      gtag('config', 'G-LS3DJFE4XR');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -39,9 +39,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ArtGallery",
+      "name": "Sacred Greek Icons",
+      "url": "https://sacredgreekicons.store",
+      "image": "https://sacredgreekicons.store/img/hero_img.png",
+      "description": "Hand-painted Byzantine Orthodox icons created with traditional techniques.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "25"
+      }
+    }
+    </script>
 </head>
 <body>
-<header></header> <div class="mobile-sidebar" id="sidebar"></div> <div class="sidebar-overlay" id="overlay"></div>
+    <header></header> 
+    <div class="mobile-sidebar" id="sidebar"></div> 
+    <div class="sidebar-overlay" id="overlay"></div>
+    
     <main>
         <section id="home" class="hero">
             <div class="hero-text-content">
@@ -58,48 +77,51 @@
         <section id="available" class="gallery-section">
             <h2>Available Now</h2>
             <p class="section-desc">These icons are currently available for purchase on eBay.</p>
-            <div class="gallery-grid" id="available-gallery">
-                </div>
+            <div class="gallery-grid" id="available-gallery"></div>
         </section>
 
         <section id="past-works" class="gallery-section alt-bg">
             <h2>Past Works</h2>
             <p class="section-desc">A selection of my previous commissions and sold works.</p>
-            <div class="gallery-grid" id="past-gallery">
-                </div>
+            <div class="gallery-grid" id="past-gallery"></div>
         </section>
 
         <section id="reviews" class="gallery-section">
-    <h2>Customer Reviews</h2>
-    <p class="section-desc">What buyers say about my icons on eBay.</p>
-    
-    <div class="reviews-grid">
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"I feel so blessed to have this icon. It is stunning and beautiful!! The icon arrived on time, shipped very quickly, and was well packaged. Thank you to the seller!"</p>
-            <span class="reviewer">- a***a (12), USA</span>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"The icon is much more beautiful than the pictures show. I could not be more pleased. I love it!"</p>
-            <span class="reviewer">- 4***t (1231), USA</span>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Outstanding seller !!!"</p>
-            <span class="reviewer">- 0***6 (912), UK</span>
-        </div>
-    </div>
-    
-    <div class="reviews-footer">
-        <p class="verified-text"><i class="fas fa-check-circle"></i> Verified purchases from my eBay store.</p>
-        <a href="https://www.ebay.ie/fdbk/feedback_profile/nicvalll?user_context=BUYER" target="_blank" class="view-btn" style="display: inline-block; width: auto; padding: 0.8rem 2rem; margin-top: 1rem;">View all eBay feedback</a>
-    </div>
-</section>
-
+            <h2>Customer Reviews</h2>
+            <p class="section-desc">What buyers say about my icons on eBay.</p>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"I feel so blessed to have this icon. It is stunning and beautiful!! The icon arrived on time, shipped very quickly, and was well packaged. Thank you to the seller!"</p>
+                    <span class="reviewer">- a***a (12), USA</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The icon is much more beautiful than the pictures show. I could not be more pleased. I love it!"</p>
+                    <span class="reviewer">- 4***t (1231), USA</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Outstanding seller !!!"</p>
+                    <span class="reviewer">- 0***6 (912), UK</span>
+                </div>
+            </div>
+            
+            <div class="reviews-footer">
+                <p class="verified-text"><i class="fas fa-check-circle"></i> Verified purchases from my eBay store.</p>
+                <a href="https://www.ebay.ie/fdbk/feedback_profile/nicvalll?user_context=BUYER" 
+                   target="_blank" 
+                   class="view-btn" 
+                   onclick="gtag('event', 'view_ebay_feedback', { 'event_category': 'Engagement' });"
+                   style="display: inline-block; width: auto; padding: 0.8rem 2rem; margin-top: 1rem;">
+                   View all eBay feedback
+                </a>
+            </div>
+        </section>
     </main>
 
-<footer></footer>
+    <footer></footer>
 
     <script src="config.js"></script>
     <script src="data.js"></script>
@@ -107,7 +129,7 @@
     <script src="script.js"></script>
 
     <button id="backToTop" class="back-to-top" title="Go to top">
-    <i class="fas fa-chevron-up"></i>
-</button>
+        <i class="fas fa-chevron-up"></i>
+    </button>
 </body>
 </html>
