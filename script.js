@@ -25,10 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function createCard(icon) {
         const card = document.createElement("div");
         card.className = "card";
-
         const firstImage = (icon.images && icon.images.length > 0) ? icon.images[0] : 'placeholder.jpg';
         const imageSrc = `img/${firstImage}`;
-        
         const productId = icon.id || icon.title.toLowerCase().replace(/\s+/g, '-');
 
         let actionButtons = "";
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadIcons() {
         const availableGallery = document.getElementById("available-gallery");
         const pastGallery = document.getElementById("past-gallery");
-
         if (availableGallery) availableGallery.innerHTML = '';
         if (pastGallery) pastGallery.innerHTML = '';
 
@@ -75,56 +72,70 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (pastGallery) pastGallery.appendChild(card);
                 }
             });
-        } else {
-            console.error("Τα δεδομένα (iconsData) δεν βρέθηκαν.");
         }
     }
 
-    // --- 4. MOBILE MENU LOGIC (SIDEBAR) ---
-    const menuBtn = document.getElementById('mobile-menu-open');
-    const closeBtn = document.getElementById('mobile-menu-close');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
+    // --- 4. NAVIGATION LOGIC (SIDEBAR & BACK TO TOP) ---
+    const initNavigation = () => {
+        const menuBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const backToTopBtn = document.getElementById("backToTop");
 
-    function toggleMenu() {
-        if (sidebar && overlay) {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+        function toggleMenu() {
+            if (sidebar && overlay) {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
         }
-    }
 
-    if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
-    if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-    if (overlay) overlay.addEventListener('click', toggleMenu);
+        if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+        if (overlay) overlay.addEventListener('click', toggleMenu);
+
+        // Scroll Logic για το Back to Top
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 400) {
+                    backToTopBtn.classList.add("show");
+                } else {
+                    backToTopBtn.classList.remove("show");
+                }
+            });
+
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+    };
 
     // --- 5. SMOOTH SCROLL LOGIC ---
     const setupSmoothScroll = () => {
         const allLinks = document.querySelectorAll('.nav-links a, .sidebar-links a');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
         allLinks.forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                
-                // Αν το link είναι εσωτερικό anchor (π.χ. #available)
-                if (href.includes('#')) {
+                if (href && href.includes('#')) {
                     const parts = href.split('#');
                     const targetId = parts[1];
-                    const page = parts[0];
-
-                    // Έλεγχος αν είμαστε στην αρχική σελίδα
                     const isHomePage = window.location.pathname.endsWith('index.html') || 
                                      window.location.pathname === '/' || 
                                      window.location.pathname === '';
 
-                    if (isHomePage && (page === 'index.html' || page === '')) {
-                        e.preventDefault();
+                    if (isHomePage) {
                         const targetElement = document.getElementById(targetId);
                         if (targetElement) {
-                            // Κλείνουμε το μενού αν είναι ανοιχτό (για κινητά)
-                            if (sidebar && sidebar.classList.contains('active')) toggleMenu();
-                            
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
+                            e.preventDefault();
+                            // Κλείσιμο μενού αν είναι ανοιχτό
+                            if (sidebar && sidebar.classList.contains('active')) {
+                                sidebar.classList.remove('active');
+                                overlay.classList.remove('active');
+                            }
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
                         }
                     }
                 }
@@ -132,8 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // EXECUTE FUNCTIONS
+    // EXECUTE ALL
     populateFromConfig();
     loadIcons();
+    initNavigation();
     setupSmoothScroll();
 });

@@ -8,23 +8,16 @@ const headerTemplate = `
 
     <div class="main-logo">
         <a href="index.html">
-            <img src="img/logo.png" alt="LezasIcon Logo">
+            <img src="img/logo.png" alt="Sacred Greek Icons Logo">
         </a>
     </div>
 
     <nav class="nav-links">
         <a href="index.html#available">Available Works</a>
         <a href="index.html#past-works">Past Works</a>
+        <a href="index.html#reviews">Reviews</a>
         <a href="#contact">Contact</a>
     </nav>
-
-     <!-- <div class="user-actions">
-        <a href="#" class="action-icon"><i class="fas fa-user"></i></a>
-        <a href="#" class="action-icon cart-icon">
-            <i class="fas fa-shopping-bag"></i>
-            <span class="cart-count">0</span>
-        </a>
-    </div>-->
 </div>
 `;
 
@@ -35,6 +28,7 @@ const sidebarTemplate = `
 <nav class="sidebar-links">
     <a href="index.html#available">Available Works</a>
     <a href="index.html#past-works">Past Works</a>
+    <a href="index.html#reviews">Reviews</a>
     <a href="#contact">Contact</a>
 </nav>
 `;

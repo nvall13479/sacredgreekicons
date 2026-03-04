@@ -489,6 +489,119 @@ header {
 .buy-btn:hover { background-color: #801a1a; }
 .view-btn:hover { background-color: #4d200a; }
 
+
+/* --- REVIEWS SECTION --- */
+#reviews h2::after {
+    content: '\f1d8'; /* FontAwesome Paper Plane ή παρόμοιο */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-left: 10px;
+    font-size: 1.2rem;
+    color: #0064D2; /* eBay Blue */
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    text-align: center;
+    font-style: italic;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover Effect */
+.review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    border-color: var(--accent-color);
+}
+
+.review-card .stars {
+    color: var(--accent-color);
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+.review-card p {
+    line-height: 1.8;
+    color: #555;
+}
+
+.reviewer {
+    display: block;
+    margin-top: 1.5rem;
+    font-weight: bold;
+    font-style: normal;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* Footer & Verified Text */
+.reviews-footer {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.verified-text {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 1rem;
+    font-family: 'EB Garamond', serif;
+}
+
+.verified-text i {
+    color: #28a745; /* Green check */
+    margin-right: 5px;
+}
+
+/* --- BACK TO TOP BUTTON --- */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background-color: var(--accent-color);
+    color: var(--header-bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Αρχικά κρυφό */
+    z-index: 1000;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-5px);
+}
+
+/* Εμφάνιση κουμπιού με JS κλάση */
+.back-to-top.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* --- BACK TO TOP BUTTON ΕΝD --- */
+
 /* --- FOOTER --- */
 footer {
     background-color: var(--header-bg-color);
@@ -817,7 +930,6 @@ footer a {
     .main-image-viewer { height: 300px; }
 }
 /* --- PRODUCT PAGE STYLES --- */
-
 
 
 
