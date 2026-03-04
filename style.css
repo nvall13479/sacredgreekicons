@@ -282,7 +282,7 @@ header {
     flex: 1;
     /* ΑΥΤΟ ΚΕΝΤΡΑΡΕΙ ΤΟ ΚΕΙΜΕΝΟ ΚΑΙ ΤΟ ΚΟΥΜΠΙ */
     text-align: center; 
-    padding-right: 0; /* Αφαιρούμε το padding-right για να είναι απόλυτα κεντραρισμένο */
+    padding: 3rem; /* Αφαιρούμε το padding-right για να είναι απόλυτα κεντραρισμένο */
     max-width: 60%; /* Αυξάνουμε λίγο το max-width για καλύτερη ισορροπία */
     margin: 0 auto; /* Διασφαλίζει ότι το container είναι στη μέση */
     z-index: 1;
