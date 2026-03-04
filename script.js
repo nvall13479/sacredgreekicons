@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Populate page content from config
+    // --- 1. POPULATE CONTENT FROM CONFIG ---
     const populateFromConfig = () => {
         if (typeof config !== 'undefined') {
             if (document.getElementById("page-title")) document.getElementById("page-title").innerText = config.pageTitle;
@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // 2. Συναρτήση δημιουργίας κάρτας (Component)
-// 2. Συναρτήση δημιουργίας κάρτας (Component)
-// 2. Συναρτήση δημιουργίας κάρτας (Component)
+    // --- 2. CARD COMPONENT ---
     function createCard(icon) {
         const card = document.createElement("div");
         card.className = "card";
@@ -33,18 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const productId = icon.id || icon.title.toLowerCase().replace(/\s+/g, '-');
 
-        // Καθορίζουμε τα κουμπιά βάσει του status
         let actionButtons = "";
-
         if (icon.status === "available") {
-            // Για τα διαθέσιμα: eBay + Details
             actionButtons = `
                 <div class="card-buttons">
                     <a href="${icon.ebayLink}" target="_blank" class="buy-btn">Buy on eBay</a>
                     <a href="product-page.html?id=${productId}" class="view-btn">Details</a>
                 </div>`;
         } else {
-            // Για τα παλαιότερα έργα: Μόνο Details
             actionButtons = `
                 <div class="card-buttons">
                     <a href="product-page.html?id=${productId}" class="view-btn" style="width: 100%; text-align: center;">Details</a>
@@ -64,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-    // 3. Φόρτωση των Icons από το data.js
+    // --- 3. LOAD ICONS DATA ---
     function loadIcons() {
         const availableGallery = document.getElementById("available-gallery");
         const pastGallery = document.getElementById("past-gallery");
@@ -86,6 +80,60 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- 4. MOBILE MENU LOGIC (SIDEBAR) ---
+    const menuBtn = document.getElementById('mobile-menu-open');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+        if (sidebar && overlay) {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+
+    if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+    if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+    if (overlay) overlay.addEventListener('click', toggleMenu);
+
+    // --- 5. SMOOTH SCROLL LOGIC ---
+    const setupSmoothScroll = () => {
+        const allLinks = document.querySelectorAll('.nav-links a, .sidebar-links a');
+        allLinks.forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Αν το link είναι εσωτερικό anchor (π.χ. #available)
+                if (href.includes('#')) {
+                    const parts = href.split('#');
+                    const targetId = parts[1];
+                    const page = parts[0];
+
+                    // Έλεγχος αν είμαστε στην αρχική σελίδα
+                    const isHomePage = window.location.pathname.endsWith('index.html') || 
+                                     window.location.pathname === '/' || 
+                                     window.location.pathname === '';
+
+                    if (isHomePage && (page === 'index.html' || page === '')) {
+                        e.preventDefault();
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            // Κλείνουμε το μενού αν είναι ανοιχτό (για κινητά)
+                            if (sidebar && sidebar.classList.contains('active')) toggleMenu();
+                            
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                }
+            });
+        });
+    };
+
+    // EXECUTE FUNCTIONS
     populateFromConfig();
     loadIcons();
+    setupSmoothScroll();
 });
