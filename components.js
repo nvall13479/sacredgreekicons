@@ -18,13 +18,13 @@ const headerTemplate = `
         <a href="#contact">Contact</a>
     </nav>
 
-    <div class="user-actions">
+     <!-- <div class="user-actions">
         <a href="#" class="action-icon"><i class="fas fa-user"></i></a>
         <a href="#" class="action-icon cart-icon">
             <i class="fas fa-shopping-bag"></i>
             <span class="cart-count">0</span>
         </a>
-    </div>
+    </div>-->
 </div>
 `;
 

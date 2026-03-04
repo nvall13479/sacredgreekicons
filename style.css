@@ -37,16 +37,25 @@ header {
 
 .top-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start; /* Το logo μένει αριστερά */
     max-width: 1400px;
     margin: 0 auto;
-    position: relative;
+    padding: 1rem 2rem;
+    position: relative; /* Απαραίτητο για να λειτουργήσει το absolute του μενού */
+    min-height: 80px; /* Ρύθμισε το ανάλογα με το ύψος του header σου */
 }
-
+.top-bar::after {
+    content: none !important;
+}
 /* Logo Setup */
+.main-logo {
+    z-index: 10; /* Διασφαλίζει ότι το logo είναι πάνω από το μενού αν συμπέσουν */
+}
 .main-logo a {
+    flex: 1; /* Αναγκάζει το logo container να πιάνει χώρο αριστερά */
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
@@ -64,11 +73,26 @@ header {
     font-weight: bold;
     color: var(--accent-color);
 }
+.main-logo, .user-actions {
+    flex: none !important;
+}
 
 /* Desktop Navigation */
+
+/* --- ΔΙΑΚΟΣΜΗΤΙΚΗ ΤΕΛΕΙΑ ΣΤΟ ΜΕΝΟΥ --- */
+
+/* Στο Desktop μενού */
+/* --- Desktop Navigation --- */
 .nav-links {
+    /* ΤΟ ΚΛΕΙΔΙ: Απόλυτη τοποθέτηση στο κέντρο */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
     display: flex;
-    gap: 2.5rem;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap; /* Αποτρέπει το "σπάσιμο" των λέξεων */
 }
 
 .nav-links a {
@@ -77,26 +101,59 @@ header {
     font-size: 1.1rem;
     position: relative;
     transition: color 0.3s;
+    /* Αλλάζουμε το flex σε inline-block για να μην "τραβάει" η γραμμή την τελεία */
+    display: inline-block; 
+    line-height: 1;
 }
 
 .nav-links a:hover {
     color: var(--accent-color);
 }
 
+/* 1. Η ΥΠΟΓΡΑΜΜΙΣΗ */
 .nav-links a::after {
     content: '';
     position: absolute;
     width: 0;
     height: 1px;
-    bottom: -2px;
+    /* Αυξάνουμε την τιμή (π.χ. από -4px σε -8px) για μεγαλύτερο κενό */
+    bottom: -8px; 
     left: 0;
     background-color: var(--accent-color);
-    transition: width 0.3s;
+    transition: width 0.3s ease;
 }
 
+/* Εδώ είναι το "κόλπο": η υπογράμμιση θα πιάνει μόνο το κείμενο 
+   γιατί το ::before (η τελεία) θα σπρωχτεί έξω από τον υπολογισμό του πλάτους */
 .nav-links a:hover::after {
     width: 100%;
 }
+
+/* 2. Η ΔΙΑΚΟΣΜΗΤΙΚΗ ΤΕΛΕΙΑ */
+.nav-links a:not(:first-child)::before {
+    content: "•";
+    /* Χρησιμοποιούμε absolute positioning για την τελεία 
+       ώστε να μην επηρεάζει το πλάτος (width: 100%) του link */
+    position: absolute;
+    left: -1.8rem; /* Την τοποθετούμε στα αριστερά του link */
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Προσθέτουμε margin στα links (εκτός από το πρώτο) 
+   για να αφήσουμε χώρο για την τελεία που "επιπλέει" */
+.nav-links a:not(:first-child) {
+    margin-left: 3rem; 
+}
+/* Στο Mobile Sidebar μενού (αν το θέλεις και εκεί) */
+.sidebar-links a:not(:last-child)::after {
+    content: "•";
+    margin-left: 10px;
+    color: var(--accent-color);
+    vertical-align: middle;
+}
+
 
 /* User Actions */
 .user-actions {
@@ -170,6 +227,14 @@ header {
     font-size: 1.3rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 0.5rem;
+     transition: color 0.3s ease, padding-left 0.3s ease; /* Ομαλή μετάβαση */
+     margin-left: 0 !important;
+}
+
+
+.sidebar-links a:hover {
+    color: var(--accent-color); /* Το πορτοκαλί/χρυσό χρώμα */
+    padding-left: 10px; /* Μια μικρή κίνηση προς τα δεξιά για έξτρα εφέ */
 }
 
 .sidebar-overlay {
@@ -186,6 +251,20 @@ header {
 .sidebar-overlay.active {
     display: block;
 }
+
+
+/* --- ΑΦΑΙΡΕΣΗ ΤΕΛΕΙΑΣ ΑΠΟ ΤΟ RESPONSIVE SIDEBAR --- */
+
+/* Ακυρώνουμε την τελεία αν την είχαμε βάλει με ::before */
+.sidebar-links a::before {
+    content: none !important;
+}
+
+/* Ακυρώνουμε την τελεία αν την είχαμε βάλει με ::after */
+.sidebar-links a::after {
+    content: none !important;
+}
+
 
 /* --- HERO SECTION --- */
 .hero {
@@ -633,10 +712,16 @@ footer a {
 
 /* Tablet & Mobile (Κάτω από 768px) */
 @media (max-width: 768px) {
+
+
+
     .nav-links {
         display: none; /* Κρύβει το Desktop Menu */
     }
 
+    .top-bar {
+        justify-content: space-between;
+    }
     .menu-toggle {
         display: block; /* Εμφανίζει το Σαντουιτς */
     }
