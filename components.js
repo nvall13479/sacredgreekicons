@@ -40,8 +40,8 @@ const sidebarTemplate = `
 `;
 
 const footerTemplate = `
-<p>&copy; 2026 LezasIcon. All rights reserved.</p>
-<p>Find me on <a href="https://www.ebay.com" target="_blank">eBay</a></p>
+<p>&copy; 2026 Sacred Greek Icons. All rights reserved.</p>
+<p>Find me on <a href="https://www.ebay.ie/sch/i.html?item=257386353891&rt=nc&_trksid=p4429486.m3561.l161211&_ssn=nicvalll" target="_blank">eBay</a></p>
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
