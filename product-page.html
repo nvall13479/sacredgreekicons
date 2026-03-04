@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="product-page-title">Product Details | LezasIcon</title>
+    
+    <title id="product-page-title">Product Details | Sacred Greek Icons</title>
+    <meta name="description" content="View detailed information about our hand-painted Byzantine icons. High-quality religious art available for your collection at Sacred Greek Icons.">
+    <meta name="keywords" content="Byzantine Icon details, Orthodox Art Gallery, Hand-painted Icons, Religious Art Collection, Sacred Greek Icons">
+
+    <meta property="og:title" content="Sacred Greek Icons | Product Details">
+    <meta property="og:description" content="Explore the craftsmanship and history of our unique hand-painted Byzantine icons.">
+    <meta property="og:image" content="https://sacredgreekicons.store/img/logo.png">
+    <meta property="og:url" content="https://sacredgreekicons.store/product-page.html">
+    <meta property="og:type" content="article">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sacred Greek Icons | Product Gallery">
+    <meta name="twitter:description" content="Detailed view of handcrafted Byzantine art.">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +46,7 @@
             </nav>
         </div>
 
-        <div class="product-container" id="product-details">
-            </div>
+        <div class="product-container" id="product-details"></div>
 
         <section class="related-works-section" id="related-section" style="display: none;">
             <h2>Available Now</h2>
@@ -65,7 +84,7 @@
 
             if (product) {
                 // 1. ΤΙΤΛΟΣ & BREADCRUMBS
-                document.getElementById("product-page-title").innerText = `${product.title} | LezasIcon`;
+                document.getElementById("product-page-title").innerText = `${product.title} | Sacred Greek Icons`;
                 
                 const breadcrumbCategory = document.getElementById("breadcrumb-category");
                 const breadcrumbCurrent = document.getElementById("breadcrumb-current");
@@ -111,12 +130,36 @@
                     </div>
                 `;
 
-                // 4. LIGHTBOX & THUMBNAILS LOGIC
+                // 4. SCHEMA MARKUP (SEO)
+                const schemaData = {
+                    "@context": "https://schema.org/",
+                    "@type": "Product",
+                    "name": product.title,
+                    "image": [`https://sacredgreekicons.store/img/${productImages[0]}`],
+                    "description": product.description || "Hand-painted Byzantine Icon by Sacred Greek Icons.",
+                    "brand": {
+                        "@type": "Brand",
+                        "name": "Sacred Greek Icons"
+                    },
+                    "offers": {
+                        "@type": "Offer",
+                        "url": window.location.href,
+                        "priceCurrency": "USD",
+                        "price": product.price.replace(/[^0-9.]/g, ''),
+                        "availability": product.status === "available" ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                        "itemCondition": "https://schema.org/NewCondition"
+                    }
+                };
+                const scriptSchema = document.createElement('script');
+                scriptSchema.type = "application/ld+json";
+                scriptSchema.text = JSON.stringify(schemaData);
+                document.head.appendChild(scriptSchema);
+
+                // 5. LIGHTBOX & THUMBNAILS LOGIC
                 const mainImg = document.getElementById("main-product-image");
                 const lightbox = document.getElementById("lightbox");
                 const modalImg = document.getElementById("modal-img");
 
-                // Thumbnail click
                 document.querySelectorAll(".thumb-item").forEach(thumb => {
                     thumb.addEventListener("click", function() {
                         currentImageIndex = parseInt(this.dataset.index);
@@ -126,14 +169,12 @@
                     });
                 });
 
-                // Open Lightbox
                 document.getElementById("open-lightbox").onclick = () => {
                     lightbox.style.display = "flex";
                     modalImg.src = `img/${productImages[currentImageIndex]}`;
                     document.body.style.overflow = "hidden"; 
                 };
 
-                // Close Lightbox
                 const closeLightbox = () => {
                     lightbox.style.display = "none";
                     document.body.style.overflow = "auto";
@@ -141,7 +182,6 @@
                 document.getElementById("close-modal").onclick = closeLightbox;
                 lightbox.onclick = (e) => { if(e.target === lightbox) closeLightbox(); };
 
-                // Navigation
                 const navigate = (step) => {
                     currentImageIndex = (currentImageIndex + step + productImages.length) % productImages.length;
                     modalImg.src = `img/${productImages[currentImageIndex]}`;
@@ -150,7 +190,7 @@
                 document.getElementById("next-image").onclick = (e) => { e.stopPropagation(); navigate(1); };
                 document.getElementById("prev-image").onclick = (e) => { e.stopPropagation(); navigate(-1); };
 
-                // 5. RELATED WORKS
+                // 6. RELATED WORKS
                 const relatedGallery = document.getElementById("related-gallery");
                 const relatedSection = document.getElementById("related-section");
                 const otherAvailable = iconsData.filter(item => item.status === 'available' && item.id !== product.id);
