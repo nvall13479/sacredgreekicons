@@ -280,9 +280,18 @@ header {
 
 .hero-text-content {
     flex: 1;
-    padding-right: 3rem;
-    max-width: 50%;
+    /* ΑΥΤΟ ΚΕΝΤΡΑΡΕΙ ΤΟ ΚΕΙΜΕΝΟ ΚΑΙ ΤΟ ΚΟΥΜΠΙ */
+    text-align: center; 
+    padding-right: 0; /* Αφαιρούμε το padding-right για να είναι απόλυτα κεντραρισμένο */
+    max-width: 60%; /* Αυξάνουμε λίγο το max-width για καλύτερη ισορροπία */
+    margin: 0 auto; /* Διασφαλίζει ότι το container είναι στη μέση */
     z-index: 1;
+}
+
+/* Αν θέλεις να ευθυγραμμίσεις και το εικονίδιο μέσα στο κουμπί */
+.hero-btn {
+    justify-content: center;
+    margin: 0 auto; /* Για να κεντραριστεί το ίδιο το κουμπί ως block αν χρειαστεί */
 }
 
 .hero-subtitle {
@@ -326,6 +335,8 @@ header {
     position: relative;
     display: flex;
     justify-content: center;
+    /* Περιορίζουμε το συνολικό πλάτος του container της εικόνας */
+    max-width: 450px;
 }
 
 .hero-image-container::after {
@@ -845,19 +856,11 @@ footer a {
     }
 
     .hero-text-content {
-    flex: 1;
-    /* ΑΥΤΟ ΚΕΝΤΡΑΡΕΙ ΤΟ ΚΕΙΜΕΝΟ ΚΑΙ ΤΟ ΚΟΥΜΠΙ */
-    text-align: center; 
-    padding-right: 0; /* Αφαιρούμε το padding-right για να είναι απόλυτα κεντραρισμένο */
-    max-width: 60%; /* Αυξάνουμε λίγο το max-width για καλύτερη ισορροπία */
-    margin: 0 auto; /* Διασφαλίζει ότι το container είναι στη μέση */
-    z-index: 1;
+        max-width: 100%;
+        padding-right: 0;
         margin-bottom: 4rem; /* Το κενό που ζήτησες */
     }
-.hero-btn {
-    justify-content: center;
-    margin: 0 auto; /* Για να κεντραριστεί το ίδιο το κουμπί ως block αν χρειαστεί */
-}
+
     .hero-title {
         font-size: 2.5rem;
     }
