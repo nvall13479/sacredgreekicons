@@ -62,7 +62,7 @@ const iconsData = [
         "id": "iisous-christos-1",
         "title": "Jesus Christ Βridegroom",
         "price": "Sold",
-        "images": ["iisous-christos-1.jpg"],
+        "images": ["iisous-christos-1.jpg","iisous-christos-1-2.jpg","iisous-christos-1-3.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy3",
         "status": "past",
         "description": "Byzantine icon of Jesus Christ, the Bridegroom."
@@ -71,7 +71,7 @@ const iconsData = [
         "id": "agios-nikolaos-past",
         "title": "Saint Nicholas",
         "price": "Sold",
-        "images": ["agios-nikolaos.jpg"],
+        "images": ["agios-nikolaos.jpg","agios-nikolaos-2.jpg","agios-nikolaos-3.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy4",
         "status": "past",
         "description": "Hand-painted icon of Saint Nicholas."
@@ -80,7 +80,7 @@ const iconsData = [
         "id": "panagia-1",
         "title": "Panagia Virgin Mary",
         "price": "Sold",
-        "images": ["panagia-1.jpg"],
+        "images": ["panagia-1.jpg","panagia-1-2.jpg","panagia-1-3.jpg"],
         "ebayLink": "https://www.ebay.com/itm/dummy5",
         "status": "past",
         "description": "The Virgin Mary holding the Christ Child."
@@ -89,10 +89,10 @@ const iconsData = [
         "id": "agios-dimitrios",
         "title": "Saint Demetrius",
         "price": "Sold",
-        "images": ["agios-dimitrios.png"],
+        "images": ["agios-dimitrios.jpg"],
         "ebayLink": "#",
         "status": "past",
-        "description": "Saint Demetrius on horseback."
+        "description": "Saint Demetrius ."
     },
     {
         "id": "agios-efraim",
@@ -102,5 +102,69 @@ const iconsData = [
         "ebayLink": "#",
         "status": "past",
         "description": "Saint Ephraim of Nea Makri."
+    },
+    {
+        "id": "saint-john-maximovich",
+        "title": "Saint John Maximovitch",
+        "price": "Sold",
+        "images": ["saint-john-maximovich-1.jpg","saint-john-maximovich-2.jpg","saint-john-maximovich-3.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint John Maximovitch."
+    },
+    {
+        "id": "saint-john-baptist-2",
+        "title": "Saint John the Baptist",
+        "price": "Sold",
+        "images": ["saint-john-baptist-2-1.jpg","saint-john-baptist-2-2.jpg","saint-john-baptist-2-3.jpg","saint-john-baptist-2-4.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint John the Baptist."
+    },
+    {
+        "id": "saint-chryse",
+        "title": "Saint Chryse (the Virgin-Martyr)",
+        "price": "Sold",
+        "images": ["saint-chryse.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint John the Baptist."
+    },
+    {
+        "id": "saint-andrew",
+        "title": "Saint Andrew the Apostle",
+        "price": "Sold",
+        "images": ["saint-andrew.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint Andrew the Apostle."
+    },
+    {
+        "id": "saint-john-baptist-1",
+        "title": "Saint John the Baptist",
+        "price": "Sold",
+        "images": ["saint-john-baptist-1.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint John the Baptist."
+    },
+    {
+        "id": " saint-joseph-hesychast",
+        "title": "Saint Joseph the Hesychast",
+        "price": "Sold",
+        "images": ["saint-joseph-hesychast-1.jpg","saint-joseph-hesychast-2.jpg","saint-joseph-hesychast-3.jpg","saint-joseph-hesychast-4.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint Joseph the Hesychast."
+    },
+    {
+        "id": "saint-joseph-cretan",
+        "title": "Saint Joseph the Cretan",
+        "price": "Sold",
+        "images": ["saint-joseph-cretan.jpg"],
+        "ebayLink": "#",
+        "status": "past",
+        "description": "Saint Joseph the Cretan."
     }
+    
 ];

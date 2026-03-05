@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (icon) heroBtn.appendChild(icon);
                 heroBtn.appendChild(document.createTextNode(' ' + config.hero.buttonText));
                 
-                // Προσθήκη Tracking στο Hero Button
                 heroBtn.addEventListener('click', () => {
                     if (typeof gtag === 'function') {
                         gtag('event', 'click_hero_button', { 'event_category': 'Engagement' });
@@ -68,21 +67,28 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-    // --- 3. LOAD ICONS DATA ---
+    // --- 3. LOAD ICONS DATA (WITH LIMIT FOR PAST WORKS) ---
     function loadIcons() {
         const availableGallery = document.getElementById("available-gallery");
         const pastGallery = document.getElementById("past-gallery");
+        
         if (availableGallery) availableGallery.innerHTML = '';
         if (pastGallery) pastGallery.innerHTML = '';
 
         if (typeof iconsData !== 'undefined' && Array.isArray(iconsData)) {
-            iconsData.forEach(icon => {
-                const card = createCard(icon);
-                if (icon.status === 'available') {
-                    if (availableGallery) availableGallery.appendChild(card);
-                } else {
-                    if (pastGallery) pastGallery.appendChild(card);
-                }
+            
+            // Φιλτράρισμα και εμφάνιση ΟΛΩΝ των διαθέσιμων έργων
+            const availableIcons = iconsData.filter(icon => icon.status === 'available');
+            availableIcons.forEach(icon => {
+                if (availableGallery) availableGallery.appendChild(createCard(icon));
+            });
+
+            // Φιλτράρισμα και εμφάνιση μόνο των πρώτων 9 παλαιότερων έργων
+            const pastIcons = iconsData.filter(icon => icon.status === 'past');
+            const limitedPastIcons = pastIcons.slice(0, 9); // Εμφάνιση 9 έργων στην αρχική
+            
+            limitedPastIcons.forEach(icon => {
+                if (pastGallery) pastGallery.appendChild(createCard(icon));
             });
         }
     }
@@ -134,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const parts = href.split('#');
                     const targetId = parts[1];
                     
-                    // Βελτιωμένος έλεγχος για την αρχική σελίδα
                     const isHomePage = window.location.pathname.includes('index.html') || 
                                      window.location.pathname.endsWith('/') || 
                                      window.location.pathname === '';
