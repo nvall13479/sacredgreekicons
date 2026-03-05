@@ -12,7 +12,7 @@ const iconsData = [
         ],
         "ebayLink": "https://www.ebay.ie/itm/257373526013",
         "status": "available",
-        "description": "Hand-painted icon of Saint Seraphim of Sarov, created with traditional egg tempera techniques."
+        "description": "<h3>Saint Seraphim of Sarov – Original Hand-Painted Greek Icon on Wood </h3><p>Up for sale is a handcrafted iconography of <strong>Saint Seraphim of Sarov</strong>. This is a unique piece of religious art, created with devotion and traditional techniques.</p><strong>Product Features:</strong><ul><li><strong>Authenticity:</strong> 100% Hand-painted (NOT a print, NOT a lithography).</li><li><strong>Dimensions:</strong> 37x27 cm (approx. 14.6 x 10.6 inches).</li><li><strong>Thickness:</strong> 2 cm (0.8 inches).<li><strong>Material:</strong> High-quality MDF wood panel.</li><li><strong>Technique:</strong> Painted by hand using a combination of acrylics and oil colors for depth and durability.</li><li><strong>Finish:</strong> Protected with a professional-grade varnish to ensure long-lasting colors and protection against moisture.</li></ul>"
     },
     {
         "id": "nicholas-frame",
@@ -25,7 +25,7 @@ const iconsData = [
         ],
         "ebayLink": "https://www.ebay.ie/itm/257386353891",
         "status": "available",
-        "description": "Exquisite icon of Saint Nicholas featuring a handcrafted wooden frame."
+        "description": "<h3>Saint Nicholas – Original Hand-Painted Greek Icon on Wood with frame</h3><p>Up for sale is a handcrafted iconography of <strong>Saint Nicholas</strong>. This is a unique piece of religious art, created with devotion and traditional techniques.</p><strong>Product Features:</strong><ul><li><strong>Authenticity:</strong> 100% Hand-painted (NOT a print, NOT a lithography).</li><li><strong>Dimensions:</strong> 40x30 cm (approx. 15.75 x 11.81 inches)</li><li><strong>Material:</strong> 12mm mdf wood panel.</li><li><strong>Technique:</strong> Painted by hand using a combination of acrylics and oil colors for depth and durability.</li><li><strong>Finish:</strong> Protected with a professional-grade varnish to ensure long-lasting colors and protection against moisture.</li></ul>"
     },
 {
         "id": "panagia-3",
