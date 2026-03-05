@@ -13,6 +13,8 @@ const headerTemplate = `
     </div>
 
     <nav class="nav-links">
+
+        <a href="index.html#about">About</a>
         <a href="index.html#available">Available Works</a>
         <a href="index.html#past-works">Past Works</a>
         <a href="index.html#reviews">Reviews</a>
@@ -26,6 +28,7 @@ const sidebarTemplate = `
     <i class="fas fa-times" id="mobile-menu-close"></i>
 </div>
 <nav class="sidebar-links">
+    <a href="index.html#about">About</a>
     <a href="index.html#available">Available Works</a>
     <a href="index.html#past-works">Past Works</a>
     <a href="index.html#reviews">Reviews</a>
