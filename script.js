@@ -166,3 +166,27 @@ document.addEventListener("DOMContentLoaded", () => {
     initNavigation();
     setupSmoothScroll();
 });
+
+// ... (ο υπόλοιπος κώδικας σου)
+
+// Βεβαιώσου ότι αυτή η συνάρτηση είναι ΕΞΩ από το DOMContentLoaded block
+async function handlePurchase() {
+    try {
+        const response = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+        
+        if (data.url) {
+            window.location.href = data.url; 
+        } else {
+            console.error("Stripe Error:", data.error);
+            alert("Σφάλμα: " + (data.error || "Κάτι πήγε στραβά"));
+        }
+    } catch (err) {
+        console.error("Fetch Error:", err);
+        alert("Αδυναμία σύνδεσης με τον server.");
+    }
+}
